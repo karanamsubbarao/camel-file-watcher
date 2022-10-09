@@ -1,0 +1,9 @@
+camel:
+  springboot:
+    main-run-controller: true
+
+folderWatch:
+  directory:  d:/inbox
+  pollingFrequency: 5000
+
+
