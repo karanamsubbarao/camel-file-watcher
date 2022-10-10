@@ -5,13 +5,28 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.transfer.s3.FileUpload;
+import software.amazon.awssdk.transfer.s3.S3TransferManager;
+import software.amazon.awssdk.transfer.s3.UploadFileRequest;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
+import static software.amazon.awssdk.transfer.s3.SizeConstant.MB;
+
+@Component
 public class FileProcessor implements Processor {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(FileProcessor.class);
 
+
+    @Autowired
+    private AWSConfiguration awsConfiguration;
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -21,6 +36,19 @@ public class FileProcessor implements Processor {
         {
             LOGGER.info("Key..."  + entry.getKey()  + " Value .. " + entry.getValue().toString());
         }
+      /*  String filePath = headers.get(Exchange.FILE_PATH).toString();
+        S3TransferManager transferManager =
+                S3TransferManager.builder()
+                        .s3ClientConfiguration(cfg -> cfg.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsConfiguration.getAccessKey(), awsConfiguration.getSecretKey())))
+                                .region(Region.of(awsConfiguration.getRegion()))
+                                .targetThroughputInGbps(20.0)
+                                .minimumPartSizeInBytes(10 * MB))
+                        .build();
+        FileUpload upload =
+                transferManager.uploadFile(u -> u.source(Paths.get(filePath))
+                        .putObjectRequest(p -> p.bucket(awsConfiguration.getBucket()).key(filePath)));
+        upload.completionFuture().join();*/
+
 
     }
 }
