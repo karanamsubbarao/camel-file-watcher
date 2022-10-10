@@ -24,10 +24,6 @@ public class FileProcessor implements Processor {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(FileProcessor.class);
 
-
-    @Autowired
-    private AWSConfiguration awsConfiguration;
-
     @Override
     public void process(Exchange exchange) throws Exception {
         Message message = exchange.getIn();
@@ -36,19 +32,5 @@ public class FileProcessor implements Processor {
         {
             LOGGER.info("Key..."  + entry.getKey()  + " Value .. " + entry.getValue().toString());
         }
-      /*  String filePath = headers.get(Exchange.FILE_PATH).toString();
-        S3TransferManager transferManager =
-                S3TransferManager.builder()
-                        .s3ClientConfiguration(cfg -> cfg.credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(awsConfiguration.getAccessKey(), awsConfiguration.getSecretKey())))
-                                .region(Region.of(awsConfiguration.getRegion()))
-                                .targetThroughputInGbps(20.0)
-                                .minimumPartSizeInBytes(10 * MB))
-                        .build();
-        FileUpload upload =
-                transferManager.uploadFile(u -> u.source(Paths.get(filePath))
-                        .putObjectRequest(p -> p.bucket(awsConfiguration.getBucket()).key(filePath)));
-        upload.completionFuture().join();*/
-
-
     }
 }
