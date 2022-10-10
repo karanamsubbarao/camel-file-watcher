@@ -11,14 +11,6 @@ folderWatch:
   pollingFrequency: 5000
 
 
-aws:
-  s3:
-    access_key_id: XXXX
-    secret_access_key: XXXX
-    region: us-east-1
-    endpointUrl: https://s3.us-east-1.amazonaws.com
-    bucket: <bucket-name>
-
 awsS3BucketName: arn:aws:s3:::<bucket-name>
 awsAccessKey: XXXX
 awsAccessKeySecret: XXXX
