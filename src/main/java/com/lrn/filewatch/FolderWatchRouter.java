@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.camel.component.aws2.s3.AWS2S3Constants;
 import software.amazon.awssdk.services.s3.S3Client;
-
-import java.io.File;
-
 @Component
 public class FolderWatchRouter extends RouteBuilder {
 
@@ -18,9 +15,6 @@ public class FolderWatchRouter extends RouteBuilder {
 
     @Autowired
     private FileProcessor fileProcessor;
-
-    @Autowired
-    private S3Client amazonS3Client;
 
     @Override
     public void configure() throws Exception {
@@ -33,7 +27,7 @@ public class FolderWatchRouter extends RouteBuilder {
                 })
                 .setHeader(AWS2S3Constants.CONTENT_LENGTH, simple("${in.header.CamelFileLength}"))
                 .setHeader(AWS2S3Constants.KEY,simple("${in.header.CamelFileNameOnly}"))
-                .to("aws2-s3://{{awsS3BucketName}}?accessKey={{awsAccessKey}}&secretKey=RAW({{awsAccessKeySecret}})")
+                .to("aws2-s3://{{awsS3BucketName}}?accessKey={{camel.component.aws2-s3.accessKey}}&secretKey=RAW({{camel.component.aws2-s3.secretKey}})")
                 .log("done.");
     }
 

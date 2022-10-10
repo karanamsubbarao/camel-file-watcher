@@ -2,7 +2,7 @@ camel:
   springboot:
     main-run-controller: true
   component:
-    aws2-s3.accessKey: X
+    aws2-s3.accessKey: XXXX
     aws2-s3.secretKey: XXXXX
     aws2-s3.region: us-east-1
 
@@ -11,6 +11,6 @@ folderWatch:
   pollingFrequency: 5000
 
 
-awsS3BucketName: arn:aws:s3:::<bucket-name>
-awsAccessKey: XXXX
-awsAccessKeySecret: XXXX
+awsS3BucketName: arn:aws:s3:::XXX
+awsAccessKey: XXXXX
+awsAccessKeySecret: XXXXX
